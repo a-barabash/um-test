@@ -4,7 +4,7 @@ import { is, Map } from 'immutable';
 import { connect } from 'react-redux';
 import { Checkbox, Dialog, FlatButton, TextField } from 'material-ui';
 
-import Progress from './components/Progress'
+import Progress from './components/Progress';
 import selector from './selectors';
 import styles from './styles.scss';
 import APP from '../../../../constants';
@@ -16,10 +16,13 @@ class CharacterModal extends React.Component {
     this.onDataChange = this.onDataChange.bind(this);
     this.saveCharacter = this.saveCharacter.bind(this);
     this.deleteCharacter = this.deleteCharacter.bind(this);
+    this.state = { character: this.props.character };
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ character: nextProps.character });
+    if (!is(this.props.character, nextProps.character)) {
+      this.setState({ character: nextProps.character });
+    }
   }
 
   onDataChange(e, newValue) {
@@ -31,7 +34,7 @@ class CharacterModal extends React.Component {
   }
 
   deleteCharacter() {
-
+    this.props.deleteCharacter(this.state.character.get('_id'));
   }
 
   render() {
@@ -73,7 +76,8 @@ class CharacterModal extends React.Component {
                 <TextField
                   name="name"
                   floatingLabelText="Name"
-                  defaultValue={this.props.character.get('name')}
+                  errorText={this.props.errors.getIn(['name', 'message'])}
+                  value={this.state.character.get('name')}
                   fullWidth
                   onChange={this.onDataChange}
                 />
@@ -82,7 +86,8 @@ class CharacterModal extends React.Component {
                 <TextField
                   name="height"
                   floatingLabelText="Height"
-                  defaultValue={this.props.character.get('height')}
+                  errorText={this.props.errors.getIn(['height', 'message'])}
+                  value={this.state.character.get('height')}
                   fullWidth
                   onChange={this.onDataChange}
                 />
@@ -93,7 +98,8 @@ class CharacterModal extends React.Component {
                 <TextField
                   name="mass"
                   floatingLabelText="Mass"
-                  defaultValue={this.props.character.get('mass')}
+                  errorText={this.props.errors.getIn(['mass', 'message'])}
+                  value={this.state.character.get('mass')}
                   fullWidth
                   onChange={this.onDataChange}
                 />
@@ -102,7 +108,8 @@ class CharacterModal extends React.Component {
                 <TextField
                   name="hair_color"
                   floatingLabelText="Hair Color"
-                  defaultValue={this.props.character.get('hair_color')}
+                  errorText={this.props.errors.getIn(['hair_color', 'message'])}
+                  value={this.state.character.get('hair_color')}
                   fullWidth
                   onChange={this.onDataChange}
                 />
@@ -113,7 +120,8 @@ class CharacterModal extends React.Component {
                 <TextField
                   name="skin_color"
                   floatingLabelText="Skin Color"
-                  defaultValue={this.props.character.get('skin_color')}
+                  errorText={this.props.errors.getIn(['skin_color', 'message'])}
+                  value={this.state.character.get('skin_color')}
                   fullWidth
                   onChange={this.onDataChange}
                 />
@@ -122,7 +130,8 @@ class CharacterModal extends React.Component {
                 <TextField
                   name="eye_color"
                   floatingLabelText="Eye Color"
-                  defaultValue={this.props.character.get('eye_color')}
+                  errorText={this.props.errors.getIn(['eye_color', 'message'])}
+                  value={this.state.character.get('eye_color')}
                   fullWidth
                   onChange={this.onDataChange}
                 />
@@ -133,7 +142,8 @@ class CharacterModal extends React.Component {
                 <TextField
                   name="birth_year"
                   floatingLabelText="Birth Year"
-                  defaultValue={this.props.character.get('birth_year')}
+                  errorText={this.props.errors.getIn(['birth_year', 'message'])}
+                  value={this.state.character.get('birth_year')}
                   fullWidth
                   onChange={this.onDataChange}
                 />
@@ -142,7 +152,7 @@ class CharacterModal extends React.Component {
                 <Checkbox
                   name="is_male"
                   label="Is Male"
-                  defaultChecked={this.props.character.get('is_male')}
+                  checked={this.state.character.get('is_male')}
                   onCheck={this.onDataChange}
                 />
               </div>
@@ -163,19 +173,21 @@ class CharacterModal extends React.Component {
 CharacterModal.propTypes = {
   source: PropTypes.instanceOf(Map),
   character: PropTypes.instanceOf(Map),
+  errors: PropTypes.instanceOf(Map),
   clearData: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   source: selector.selectSource(state),
   character: selector.selectCharacterData(state),
+  errors: selector.selectErrors(state),
   clearData: React.PropTypes.func,
 });
 
 const mapDispatchToProps = dispatch => ({
   clearSource: () => dispatch({ type: APP.CHARACTERS.SET_MODAL_SOURCE }),
   saveCharacter: (character, source) => dispatch({ type: APP.CHARACTERS.SAVE, character, source }),
-  deleteCharacter: () => dispatch({ type: APP.CHARACTERS.DELETE }),
+  deleteCharacter: (docId) => dispatch({ type: APP.CHARACTERS.DELETE, docId }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CharacterModal);

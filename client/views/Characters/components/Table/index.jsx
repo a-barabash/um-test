@@ -8,11 +8,12 @@ import Favorite from 'material-ui/svg-icons/action/favorite';
 import FavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import { amber600, blueGrey600 } from 'material-ui/styles/colors';
 
+import Filter from './components/Filter'
 import selector from './selectors';
 import styles from './styles.scss';
 import APP from '../../../../constants';
 
-class Characters extends React.Component {
+class CharactersTable extends React.Component {
 
   constructor(props) {
     super(props);
@@ -51,6 +52,7 @@ class Characters extends React.Component {
 
     return (
       <div className={styles.vCharactersTable}>
+        <Filter filter={this.props.searchFilter} />
         <div className={styles.tableCaption}>
           <span className={styles.title}>Characters table</span>
           <div className={styles.controlElements}>
@@ -132,7 +134,7 @@ class Characters extends React.Component {
   }
 }
 
-Characters.propTypes = {
+CharactersTable.propTypes = {
   characters: PropTypes.instanceOf(List),
   favoriteSwitcher: PropTypes.bool,
   searchFilter: PropTypes.string,
@@ -151,4 +153,4 @@ const mapDispatchToProps = dispatch => ({
   setModalSource: (rowId) => dispatch({ type: APP.CHARACTERS.SET_MODAL_SOURCE, rowId }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Characters);
+export default connect(mapStateToProps, mapDispatchToProps)(CharactersTable);

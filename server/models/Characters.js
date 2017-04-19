@@ -4,7 +4,7 @@ const mongoose = require('../mongoose');
 
 const schema = [
   {
-    name: String,
+    name: { type: String, required: true },
     height: { type: Number, required: true },
     mass: { type: Number, required: true },
     hair_color: { type: String, required: true },

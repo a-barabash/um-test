@@ -12,11 +12,22 @@ const selectCharacters = createSelector(
     if (state.hasIn(path)) {
       list = state.getIn(path).sort((a, b) => a.get('_id').localeCompare(b.get('_id')));
 
-      if (state.hasIn(['app', 'characters', 'favoriteSwitcher'])) {
-        const favoriteSwitcher = state.getIn(['app', 'characters', 'favoriteSwitcher']);
+      const favoriteSwitcherPath = ['app', 'characters', 'favoriteSwitcher'];
+      if (state.hasIn(favoriteSwitcherPath)) {
+        const favoriteSwitcher = state.getIn(favoriteSwitcherPath);
 
         if (favoriteSwitcher) {
           list = list.filter(character => character.get('isFavorite'));
+        }
+      }
+
+      const searchFilterPath = ['app', 'characters', 'searchFilter'];
+
+      if (state.hasIn(searchFilterPath)) {
+        const filter = state.getIn(searchFilterPath).replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+
+        if (filter) {
+          list = list.filter(character => character.get('name').search(new RegExp(filter, 'i')) !== -1);
         }
       }
     }

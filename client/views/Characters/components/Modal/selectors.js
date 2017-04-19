@@ -1,4 +1,4 @@
-import { Map, List } from 'immutable';
+import { Map } from 'immutable';
 import { createSelector } from 'reselect';
 
 const stateSelector = state => state;
@@ -31,7 +31,16 @@ const selectCharacterData = createSelector(
   },
 );
 
+const selectErrors = createSelector(
+  stateSelector,
+  (state) => {
+    const path = ['app', 'characters', 'modal', 'errors'];
+    return state.hasIn(path) ? state.getIn(path) : Map();
+  },
+);
+
 export default {
   selectSource,
   selectCharacterData,
+  selectErrors,
 };

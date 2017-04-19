@@ -21,16 +21,23 @@ module.exports = {
       is_male: req.body.character.is_male,
     };
 
-    if (typeof req.body.character._id === 'undefined') {
-      new Characters(doc)
-      .save()
-      .then(doc => res.json(doc))
-      .catch(err => res.status(500).json(err));
-    } else {
-      Characters.findOneAndUpdate({ _id: req.body.character._id }, doc, { new: true })
-      .then(doc => res.json(doc))
-      .catch(err => res.status(500).json(err));
+    if (typeof req.body.character._id !== 'undefined') {
+      doc._id = req.body.character._id;
     }
+
+    const character = new Characters(doc);
+    character.isNew = !doc._id;
+
+    character
+    .save()
+    .then(doc => res.json(doc))
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        res.json({ errors: err.errors });
+      } else {
+        res.status(500).json(err);
+      }
+    });
   },
 
   setFavoriteState: (req, res) => {
