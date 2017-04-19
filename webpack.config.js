@@ -68,6 +68,5 @@ module.exports = {
     }),
     new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'js/vendor.bundle.js'}),
   ],
-  watch: process.env.WATCH !== null,
 };
 

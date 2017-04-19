@@ -1,6 +1,6 @@
 # um-test
 
-Testing app
+Test app
 
 ## Usage
 
@@ -9,11 +9,7 @@ Testing app
 npm install
 create .env file in root directory (feel free to use .env.example)
 npm run-script migrate
-```
-
-### Build
-```bash
-webpack
+npm run-script build
 ```
 
 ### Run server
@@ -23,7 +19,5 @@ node index.js
 
 ### Dependencies
 ```bash
-Node.js
-Webpack
-MongoDB
+MongoDB has to be installed and run in order to be able work with application
 ```

@@ -16,7 +16,7 @@ export default function configureStore(initialState = {}, history) {
     routerMiddleware(history),
   ];
 
-  const composeEnhancers = composeWithDevTools({ realtime: true, hostname: 'localhost', port: 8000 });
+  const composeEnhancers = composeWithDevTools({ realtime: process.env.NODE_ENV !== 'production', hostname: 'localhost', port: 8000 });
 
   const store = createStore(
     createReducers(),

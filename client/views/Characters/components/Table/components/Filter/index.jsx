@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import { connect } from 'react-redux';
 import { TextField } from 'material-ui';
 
@@ -11,7 +10,6 @@ class Filter extends React.Component {
 
   constructor(props) {
     super(props);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
     this.state = { filter: this.props.filter };
   }
@@ -24,7 +22,7 @@ class Filter extends React.Component {
     clearTimeout(this.state.timeoutId);
     const timeoutId = setTimeout(() => {
       this.props.setFilter(newValue);
-    }, 1000);
+    }, 500);
     this.setState({ filter: newValue, timeoutId });
   }
 
