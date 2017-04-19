@@ -8,6 +8,7 @@ Testing app
 ```bash
 npm install
 npm run-script migrate
+create .env file in root directory (feel free to use .env.example)
 ```
 
 ### Build
@@ -15,7 +16,7 @@ npm run-script migrate
 webpack
 ```
 
-### Run dev server
+### Run server
 ```bash
 node index.js
 ```
@@ -23,5 +24,6 @@ node index.js
 ### Dependencies
 ```bash
 Node.js
+Webpack
 MongoDB
 ```
