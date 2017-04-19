@@ -1,14 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
-function NotFound() {
-  return (
-    <div>
-      <h3>Not Found</h3>
-      <Link to={'/'} >App</Link>
-    </div>
-  );
+import Table from './components/Table';
+import Modal from './components/Modal';
+
+class Characters extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <Table/>
+        <Modal/>
+      </div>
+    );
+  }
 }
 
-export default connect(null, null)(NotFound);
+export default connect(null, null)(Characters);

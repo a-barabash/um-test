@@ -20,14 +20,39 @@ function routeReducer(state = routeInitialState, action) {
 }
 
 const initialState = fromJS({
-  loading: false,
-  error: false,
-  user: null,
+  characters: {
+    list: [],
+    favoriteSwitcher: false,
+    searchFilter: '',
+    template: {
+      name: '',
+      height: '',
+      mass: '',
+      hair_color: '',
+      skin_color: '',
+      eye_color: '',
+      birth_year: '',
+      is_male: false
+    }
+  },
 });
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
-
+    case APP.CHARACTERS.LIST_RECEIVED:
+      return state.setIn(['characters', 'list'], fromJS(action.response.data));
+    case APP.CHARACTERS.SET_FAVORITE_SWITCHER:
+      return state.setIn(['characters', 'favoriteSwitcher'], action.state);
+    case APP.CHARACTERS.FAVORITE_STATE_CHANGED:
+      return state.setIn(['characters', 'list', action.request.rowId, 'isFavorite'], action.request.state);
+    case APP.CHARACTERS.SET_MODAL_SOURCE:
+      return typeof action.rowId !== 'undefined' ?
+        state.setIn(['characters', 'modal', 'source', 'rowId'], action.rowId) :
+          state.deleteIn(['characters', 'modal', 'source']);
+    case APP.CHARACTERS.SAVED:
+      return action.request.source.rowId !== null ?
+        state.setIn(['characters', 'list', action.request.source.rowId], fromJS(action.response.data)) :
+          state.updateIn(['characters', 'list'], list => list.push(fromJS(action.response.data)));
     default:
       return state;
   }
@@ -36,6 +61,6 @@ function appReducer(state = initialState, action) {
 export default function createReducers() {
   return combineReducers({
     route: routeReducer,
-    global: appReducer,
+    app: appReducer,
   });
 }

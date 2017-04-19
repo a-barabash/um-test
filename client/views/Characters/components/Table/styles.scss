@@ -1,0 +1,101 @@
+.vCharactersTable {
+  margin: 30px;
+
+  & .tableCaption {
+    display: flex;
+    height: 50px;
+
+    & .title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      border: none;
+      background-color: initial;
+      font-size: inherit;
+      font-family: inherit;
+      outline: none;
+
+      & .lastUpdate {
+        position: absolute;
+        bottom: 0;
+        font-size: 11px;
+        color: #607d8b;
+      }
+    }
+
+    & .disabled {
+      color: #9E9E9E;
+      cursor: not-allowed;
+    }
+
+    & .toggleIco {
+      height: 16px !important;
+      vertical-align: middle;
+      color: inherit !important;
+    }
+
+    & .controlElements {
+      margin-left: auto;
+
+      & .badges {
+        display: inline-flex;
+
+        & .badge {
+          display: flex;
+          height: 12px;
+          margin: 18px 0 0 10px;
+          border: none;
+          background-color: initial;
+          font-size: 12px;
+          font-family: inherit;
+          outline: none;
+          cursor: pointer;
+        }
+
+        & .badge:hover {
+          color: #4DD0E1;
+        }
+
+        & .selectedBadge {
+          color: #00BCD4;
+        }
+      }
+
+      & .button {
+        display: inline-flex;
+        align-self: center;
+        margin-left: 20px !important;
+      }
+    }
+  }
+
+  & .tableHeaderColumn {
+    white-space: pre-line !important;
+  }
+
+  & .stateColumn {
+    width: 44px;
+    padding: 0 !important;
+  }
+
+  & .firstColumn {
+    padding-left: 0 !important;
+  }
+
+  & .tableHeaderFix {
+    width: 17px;
+    padding: 0 !important;
+  }
+
+  & .tableBodyRow {
+    cursor: pointer;
+
+    & .stateColumn {
+
+      & .ico {
+        display: flex !important;
+        width: 18px !important;
+      }
+    }
+  }
+}

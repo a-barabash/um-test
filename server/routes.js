@@ -13,7 +13,7 @@ router.use((req, res, next) => {
 });
 
 router.route('/characters/list').get(characters.list);
-router.route('/characters/add').post(characters.add);
+router.route('/characters/save').post(characters.save);
 router.route('/characters/:id/set-favorite-state').patch(characters.setFavoriteState);
 router.route('/characters/:id/delete').delete(characters.delete);
 

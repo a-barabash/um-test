@@ -4,11 +4,12 @@ import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'remote-redux-devtools';
 
+import sagas from './sagas'
 import createReducers from './reducers';
 
-const sagaMiddleware = createSagaMiddleware();
-
 export default function configureStore(initialState = {}, history) {
+  const sagaMiddleware = createSagaMiddleware();
+
   const middleware = [
     sagaMiddleware,
     routerMiddleware(history),
@@ -16,9 +17,13 @@ export default function configureStore(initialState = {}, history) {
 
   const composeEnhancers = composeWithDevTools({ realtime: true, hostname: 'localhost', port: 8000 });
 
-  return createStore(
+  const store = createStore(
     createReducers(),
     fromJS(initialState),
     composeEnhancers(applyMiddleware(...middleware)),
   );
+
+  sagaMiddleware.run(sagas);
+
+  return store;
 }

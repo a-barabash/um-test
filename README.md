@@ -7,8 +7,8 @@ Testing app
 ### Installation
 ```bash
 npm install
-npm run-script migrate
 create .env file in root directory (feel free to use .env.example)
+npm run-script migrate
 ```
 
 ### Build
