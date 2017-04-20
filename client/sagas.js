@@ -68,8 +68,8 @@ export function* deleteCharacter(action) {
       `/api/characters/${action.docId}/delete`,
       { character: action.character },
     );
-    yield put({ type: APP.CHARACTERS.DELETED, docId: action.docId });
     yield put({ type: APP.CHARACTERS.SET_MODAL_SOURCE });
+    yield put({ type: APP.CHARACTERS.DELETED, docId: action.docId });
   } catch (err) {
     yield put({ type: APP.CHARACTERS.DELETING_ERROR, error: err.message });
   } finally {

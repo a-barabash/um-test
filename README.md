@@ -17,7 +17,8 @@ npm run-script build
 node index.js
 ```
 
-### Dependencies
+### Additional info
 ```bash
+Default application url is localhost:5000
 MongoDB has to be installed and run in order to be able work with application
 ```

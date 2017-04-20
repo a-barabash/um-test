@@ -2,11 +2,6 @@
   width: 80% !important;
   max-width: 1920px !important;
 
-  & .progress {
-    display: flex;
-    justify-content: center;
-  }
-
   & .title {
     padding-bottom: 20px;
     color: rgba(0, 0, 0, 0.870588);
@@ -18,78 +13,6 @@
       margin-left: 40px;
       font-size: 16px;
       color: rgba(0, 0, 0, 0.6);
-    }
-  }
-
-  & .infoBlock {
-    margin-bottom: 20px;
-
-    & span {
-      margin-right: 40px;
-    }
-  }
-
-  & .actionsBlock {
-
-    & .btn {
-      margin-right: 20px;
-    }
-  }
-
-  & .tableHeaderColumn {
-    padding: 0 !important;
-
-    & .toggler {
-      margin-left: 24px;
-    }
-
-    & button {
-      width: 100%;
-      height: 100%;
-      padding: 0 24px;
-      border: none;
-      background-color: initial;
-      color: inherit;
-      font-size: inherit;
-      font-family: inherit;
-      text-align: left;
-      outline: none;
-      cursor: pointer;
-    }
-
-    & .sortIco {
-      height: 12px !important;
-      vertical-align: middle;
-      color: inherit !important;
-    }
-  }
-
-  & .tableHeaderFix {
-    width: 17px;
-    padding: 0 !important;
-  }
-
-  & .tableRowFix {
-    border-bottom: none !important;
-
-    & .cell {
-      display: flex;
-      box-sizing: border-box;
-      width: calc(100% + 48px);
-      height: calc(100% + 2px);
-      margin-left: -24px;
-      padding-left: 24px;
-      align-items: center;
-      border-bottom: 1px solid rgb(224, 224, 224);
-    }
-  }
-
-  & .modalFooter {
-    display: flex;
-    margin-top: 20px;
-
-    & .controlElements {
-      margin-left: auto;
     }
   }
 
@@ -111,6 +34,15 @@
         align-items: flex-end;
         height: 68px;
       }
+    }
+  }
+
+  & .modalFooter {
+    display: flex;
+    margin-top: 20px;
+
+    & .controlElements {
+      margin-left: auto;
     }
   }
 }

@@ -1,5 +1,3 @@
-/* global document */
-
 import 'babel-polyfill';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import React from 'react';
